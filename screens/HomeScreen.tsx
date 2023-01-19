@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, TextInput, ScrollView, Pressable } from "react-native";
 import { Ionicons } from '@expo/vector-icons'; 
-import CategoryTile from "../components/renderItems/categoryTile";
+import CategoryTile from "../components/renderItems/CategoryTile";
 
 
 const categories = [
-    {name:"Any Category",icon:"albums-outline",iconPressed:"albums", id:null},
+    {name:"Any Category",icon:"albums-outline",iconPressed:"albums", id:0},
     {name:"General Knowledge",icon:"bandage-outline",iconPressed:"bandage-sharp", id:9},
     {name:"Books",icon:"book-outline",iconPressed:"book-sharp", id:10},
     {name:"Film",icon:"film-outline",iconPressed:"film-sharp", id:11},
@@ -45,7 +45,6 @@ function HomeScreen():JSX.Element{
         </View>
     </View>
 }
-//styles.categoryTileContainer
 export default HomeScreen;
 const styles = StyleSheet.create({
     mainContainer:{
