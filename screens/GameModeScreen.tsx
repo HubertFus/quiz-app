@@ -4,8 +4,10 @@ import ButtonOutlineSelectGroup from "../components/buttons/ButtonOutlineSelectG
 import { Ionicons } from '@expo/vector-icons'; 
 import Button from "../components/buttons/Button";
 import { useEffect, useState } from "react";
-
+import { useNavigation } from '@react-navigation/native';
+import { type StackNavigation } from "../App";
 function GameModeScreen({route}:any):JSX.Element{
+    const { navigate } = useNavigation<StackNavigation>()
     const [ api, setApi ] = useState<{difficulty?: string, category?: string | null, quantity?: string}>();
     useEffect(():void=>{
         let prev = {...api}
@@ -27,8 +29,8 @@ function GameModeScreen({route}:any):JSX.Element{
         setApi(prev);
     }
     function onSumbit():void{
-        const querry = `https://opentdb.com/api.php?amount=${api?.quantity}${api?.category?`&category=${api?.category}`:""}&difficulty=${api?.difficulty}`;
-        console.log(querry)
+        const url = `https://opentdb.com/api.php?amount=${api?.quantity}${api?.category?`&category=${api?.category}`:""}&difficulty=${api?.difficulty}&type=multiple&encode=base64`;
+        navigate("Game",{url:url})
     }
     return <View style={styles.BodyContainer}>
         <Ionicons name={route.params.icon} color="white" size={100}/>

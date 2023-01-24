@@ -13,7 +13,7 @@ function ButtonOutlineSelectGroup(props:Props):JSX.Element{
   }
   return <View style={styles.buttonContainer}>
     {props.titles.map((item:string)=>{
-      return <Pressable style={[styles.borderButton,item===pressedButton?{backgroundColor:"#d6d6d6"}:null]} onPress={()=>{onSelectChange(item)}}>
+      return <Pressable key={item} style={[styles.borderButton,item===pressedButton?{backgroundColor:"#d6d6d6"}:null]} onPress={()=>{onSelectChange(item)}}>
         <Text style={[item===pressedButton?{color:"#3550DC"}:{color:"black"},{fontSize:19}]}>{item}</Text>
       </Pressable>
     })}
