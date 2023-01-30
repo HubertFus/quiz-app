@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, TextInput, ScrollView, Pressable } from "react-
 import { Ionicons } from '@expo/vector-icons'; 
 import CategoryTile from "../components/renderItems/CategoryTile";
 import { useState } from "react";
+import { RFValue } from "./GameScreen";
 
 
 export  const categories = [
@@ -94,7 +95,7 @@ const styles = StyleSheet.create({
     },
     titleText:{
         color:"white",
-        fontSize:23,
+        fontSize:RFValue(43),
         fontWeight:"bold",
         letterSpacing:1,
     },
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
     },
     subTitleText:{
         color:"#3550DC",
-        fontSize:19,
+        fontSize:RFValue(30),
         fontWeight:"700"
     },
     categoriesContainer:{

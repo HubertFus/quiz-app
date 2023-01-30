@@ -3,6 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useState } from "react";
 import { useNavigation } from '@react-navigation/native';
 import { type StackNavigation } from "../../App";
+import { RFValue } from "../../screens/GameScreen";
 interface iconTile{
     name:string;
     icon: string;
@@ -15,7 +16,7 @@ function CategoryTile({item}:any):JSX.Element{
 
     return <Pressable style={[styles.categoryTileContainer,pressed && styles.pressedTile]} onPressIn={()=>{setPressed(true)}} 
     onPressOut={()=>{setPressed(false);navigate("GameMode",item)}}>
-        <Ionicons name={pressed?item.iconPressed:item.icon} size={24} color="#3550DC" />
+        <Ionicons name={pressed?item.iconPressed:item.icon} size={30} color="#3550DC" />
         <Text style={[styles.categoryTileTitle,{color:pressed?"#3550DC":"gray"}]}>{item.name}</Text>
     </Pressable>
 }
@@ -43,7 +44,8 @@ const styles = StyleSheet.create({
     categoryTileTitle:{
         textAlign:"center",
         margin:10,
-        color:"red"
+        color:"red",
+        fontSize:RFValue(16)
     },
     pressedTile:{
         backgroundColor:"#d6d6d6"

@@ -10,7 +10,7 @@ export function RFValue(fontSize:number, standardScreenHeight = 680) {
     const { height, width } = Dimensions.get("window");
     const standardLength = width > height ? width : height;
     const offset =
-      width > height ? 0 :78; // iPhone X style SafeAreaView size in portrait
+      width > height ? 0 :78; 
   
     const deviceHeight =
         Platform.OS === "android"

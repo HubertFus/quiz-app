@@ -6,6 +6,7 @@ import Button from "../components/buttons/Button";
 import { useEffect, useState } from "react";
 import { useNavigation } from '@react-navigation/native';
 import { type StackNavigation } from "../App";
+import { RFValue } from "./GameScreen";
 function GameModeScreen({route}:any):JSX.Element{
     const { navigate } = useNavigation<StackNavigation>()
     const [ api, setApi ] = useState<{difficulty?: string, category?: string | null, quantity?: string}>();
@@ -33,18 +34,18 @@ function GameModeScreen({route}:any):JSX.Element{
         navigate("Game",{url:url,quantity:api?.quantity,category:api?.category})
     }
     return <View style={styles.BodyContainer}>
-        <Ionicons name={route.params.icon} color="white" size={100}/>
+        <Ionicons name={route.params.icon} color="white" size={100} style={{padding:30}}/>
         <View style={styles.mainContainer}>
-            <View style={styles.buttonContainer}>
+            <View style={[styles.buttonContainer,{flex:1.6}]}>
                 <Text style={styles.title}>Select Difficulty</Text>
                 <ButtonOutlineSelectGroup titles={titles} onChangeSelect={selectDifficultyHandler}/>
                 <Text style={styles.title}>Number of Questions</Text>
                 <ButtonOutlineSelectGroup titles={quantity} onChangeSelect={selectQuantityHandler}/>
             </View>
-            
-            <View style={styles.buttonContainer}>
+            <View style={[styles.buttonContainer,{flex:1}]}>
                 <Button text="Start" onPress={onSumbit}/>
             </View>
+            
         </View>
     </View>
 }
@@ -71,14 +72,13 @@ const styles = StyleSheet.create({
 
     },
     title:{
-        fontSize:20,
+        fontSize:RFValue(27),
         fontWeight:"bold",
         color:"#757575",
     },
     buttonContainer:{
-        flex:1,
         display:"flex",
-        justifyContent:"center",
+        justifyContent:"space-around",
         alignItems:"center"
     }
 })

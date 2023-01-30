@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "tstest",
-    "slug": "tstest",
+    "name": "quiz-app",
+    "slug": "quiz-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,10 +24,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.hubert.fusiarz.quizapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "84731e94-4544-44dc-8278-5422253ffa11"
+      }
     }
   }
 }
