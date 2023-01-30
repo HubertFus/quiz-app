@@ -5,6 +5,7 @@ import { createStackNavigator, StackNavigationProp } from '@react-navigation/sta
 import { NavigationContainer } from '@react-navigation/native';
 import GameModeScreen from './screens/GameModeScreen';
 import GameScreen from './screens/GameScreen';
+import StatisticScreen from './screens/StatisticScreen';
 
 interface Data {
   category: string;
@@ -21,11 +22,12 @@ interface categories {
   id: 0;
 }
 
-export type ScreenNames = ["Home", "GameMode","Game"] // type these manually
+export type ScreenNames = ["Home", "GameMode", "Game", "Statistic"] // type these manually
 export type RootStackParamList = {
   Home: undefined,
   GameMode: categories,
-  Game: object
+  Game: object,
+  Statistic: object
 };
 export type StackNavigation = StackNavigationProp<RootStackParamList>;
 const Stack = createStackNavigator<RootStackParamList>();
@@ -36,7 +38,8 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} options={{headerShown:false}}/>
         <Stack.Screen name="GameMode" component={GameModeScreen} options={({route})=>({title:route.params.name,headerTitleAlign:"center",headerTintColor:"white",headerStyle:{backgroundColor:"#3550DC",borderBottomColor:"white",borderBottomWidth:2}})}/>
-        <Stack.Screen name="Game" component={GameScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="Game" component={GameScreen} options={{headerShown:false}} />
+        <Stack.Screen name="Statistic" component={StatisticScreen} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

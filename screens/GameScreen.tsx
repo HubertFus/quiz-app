@@ -3,6 +3,9 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import { Text, View,ActivityIndicator, StyleSheet, Dimensions , Platform, StatusBar} from "react-native";
 import Button from "../components/buttons/Button";
 import QuestionBox from "../components/renderItems/QuestionBox";
+import { useNavigation } from '@react-navigation/native';
+import { type StackNavigation } from "../App";
+import { decode } from "js-base64";
 export function RFValue(fontSize:number, standardScreenHeight = 680) {
     const { height, width } = Dimensions.get("window");
     const standardLength = width > height ? width : height;
@@ -34,6 +37,8 @@ function GameScreen({route}:any):JSX.Element{
     const [currentQuestion, setCurrentQuestion] = useState<number>(0)
     const [data, setData] = useState<Array<question>>()
     const [score, setScore] = useState<score>({totalScore:0,question:[]})
+    const { navigate } = useNavigation<StackNavigation>()
+
     const source = axios.CancelToken.source();
     useLayoutEffect(()=>{
         axios.get(route.params.url).then(res=>{
@@ -54,21 +59,23 @@ function GameScreen({route}:any):JSX.Element{
         let prev = score
         prev.totalScore += point;
         prev.question.push(point?true:false)
-        if(currentQuestion<4){
+        setScore(prev)
+        if(currentQuestion<parseInt(route.params.quantity)-1){
             setCurrentQuestion(prev=>prev+1)
         }
         else{
-            console.log(score)
+            navigate("Statistic",{score:score,category:route.params.category})
         }
-        setScore(prev)
     }
     return <View style={styles.container}>
         {data?<View style={{flex:1,width:"100%"}}>
             <QuestionBox onNextClickHandler={onNextClickHandler} correctAnswer={(data[currentQuestion].correct_answer)} question={(data[currentQuestion].question)} 
             answers={shuffleAnswers(data[currentQuestion].incorrect_answers,data[currentQuestion].correct_answer)} currentQuestion={currentQuestion+1}/>
+
         </View>:<View style={styles.loadingContainer}><Text style={[styles.title,]}>Loading Game...</Text>
-        <ActivityIndicator size="large" color="#0000ff" />
-        <Button text="Cancel"/></View>}
+        
+        <ActivityIndicator size="large" color="white" />
+        <Button text="Cancel" onPress={()=>{navigate("Home")}}/></View>}
     </View>
 }
 export default GameScreen;
@@ -84,7 +91,8 @@ const styles = StyleSheet.create({
         fontSize: RFValue(30),
         fontWeight:"bold",
         textAlign:"center",
-        width:"100%"
+        width:"100%",
+        color:"white"
     },
     loadingContainer:{
         flex:1,

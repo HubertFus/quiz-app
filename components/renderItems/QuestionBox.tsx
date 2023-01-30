@@ -14,14 +14,12 @@ interface props {
     quantity?: number
 }
 function QuestionBox(props:props){
-    const { navigate } = useNavigation<StackNavigation>()
     const [guees, setGuees] = useState<string>()
     useEffect(()=>{
         setGuees("")
     },[props.currentQuestion])
     function onPressOut(text:string){
         setGuees(text)
-        console.log(decode(props.correctAnswer))
         setTimeout(()=>{
             props.onNextClickHandler(props.correctAnswer===text?1:0)
         },1000)
@@ -32,7 +30,7 @@ function QuestionBox(props:props){
             <Text style={styles.questionText}>{decode(props.question)}</Text>
             {props.answers.map((answer:string)=>{
                 return<Pressable key={answer} style={[styles.answer,(guees===answer && guees!==(props.correctAnswer))?{backgroundColor:"red"}:null,(guees===answer && guees===(props.correctAnswer))?{backgroundColor:"green"}:null,(guees && answer===props.correctAnswer)?{backgroundColor:"green"}:null]} onPress={()=>{!guees?onPressOut(answer):null}}>
-                    <Text style={[{fontSize:RFValue(20)},guees===answer ||(guees && answer===props.correctAnswer)?{color:"white"}:null]}>{decode(answer)}</Text>
+                    <Text style={[{fontSize:RFValue(20),paddingHorizontal:30},guees===answer ||(guees && answer===props.correctAnswer)?{color:"white"}:null]}>{decode(answer)}</Text>
                 </Pressable>
             })}
         </View>

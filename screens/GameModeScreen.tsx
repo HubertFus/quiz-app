@@ -29,8 +29,8 @@ function GameModeScreen({route}:any):JSX.Element{
         setApi(prev);
     }
     function onSumbit():void{
-        const url = `https://opentdb.com/api.php?amount=${api?.quantity}${api?.category?`&category=${api?.category}`:""}&difficulty=${api?.difficulty}&type=multiple&encode=base64`;
-        navigate("Game",{url:url})
+        const url = `https://opentdb.com/api.php?amount=${api?.quantity}${route.params.idy>8?`&category=${api?.category}`:""}&difficulty=${api?.difficulty}&type=multiple&encode=base64`;
+        navigate("Game",{url:url,quantity:api?.quantity,category:api?.category})
     }
     return <View style={styles.BodyContainer}>
         <Ionicons name={route.params.icon} color="white" size={100}/>
