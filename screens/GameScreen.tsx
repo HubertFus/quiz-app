@@ -42,6 +42,7 @@ function GameScreen({route}:any):JSX.Element{
     const source = axios.CancelToken.source();
     useLayoutEffect(()=>{
         axios.get(route.params.url).then(res=>{
+                console.log(res.data.results)
                 setData(res.data.results)
             return source.cancel()
         })

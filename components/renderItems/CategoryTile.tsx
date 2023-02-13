@@ -4,17 +4,13 @@ import { useState } from "react";
 import { useNavigation } from '@react-navigation/native';
 import { type StackNavigation } from "../../App";
 import { RFValue } from "../../screens/GameScreen";
-interface iconTile{
-    name:string;
-    icon: string;
-    iconPressed:string;
-    id: null | number;
-}
+
 function CategoryTile({item}:any):JSX.Element{
     const { navigate } = useNavigation<StackNavigation>()
     const [pressed, setPressed] = useState<boolean>(false)
 
-    return <Pressable style={[styles.categoryTileContainer,pressed && styles.pressedTile]} onPressIn={()=>{setPressed(true)}} 
+    return <Pressable style={[styles.categoryTileContainer,pressed && styles.pressedTile]} 
+    onPressIn={()=>{setPressed(true)}} 
     onPressOut={()=>{setPressed(false);navigate("GameMode",item)}}>
         <Ionicons name={pressed?item.iconPressed:item.icon} size={30} color="#3550DC" />
         <Text style={[styles.categoryTileTitle,{color:pressed?"#3550DC":"gray"}]}>{item.name}</Text>

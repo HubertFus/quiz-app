@@ -11,6 +11,7 @@ function GameModeScreen({route}:any):JSX.Element{
     const { navigate } = useNavigation<StackNavigation>()
     const [ api, setApi ] = useState<{difficulty?: string, category?: string | null, quantity?: string}>();
     useEffect(():void=>{
+        console.log(route.params)
         let prev = {...api}
         prev.category = route.params.id;
         prev.difficulty = titles[1].toLowerCase();
@@ -30,7 +31,7 @@ function GameModeScreen({route}:any):JSX.Element{
         setApi(prev);
     }
     function onSumbit():void{
-        const url = `https://opentdb.com/api.php?amount=${api?.quantity}${route.params.idy>8?`&category=${api?.category}`:""}&difficulty=${api?.difficulty}&type=multiple&encode=base64`;
+        const url = `https://opentdb.com/api.php?amount=${api?.quantity}${route.params.id>8?`&category=${api?.category}`:""}&difficulty=${api?.difficulty}&type=multiple&encode=base64`;
         navigate("Game",{url:url,quantity:api?.quantity,category:api?.category})
     }
     return <View style={styles.BodyContainer}>
